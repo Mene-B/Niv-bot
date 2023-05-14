@@ -1,4 +1,5 @@
-const {SlashCommandBuilder,EmbedBuilder} = require("discord.js")
+const {SlashCommandBuilder,EmbedBuilder} = require("discord.js");
+const {adminId} = require("../config.json");
 
 module.exports = {
     data : new SlashCommandBuilder()
@@ -50,7 +51,7 @@ module.exports = {
             )
         }),
     run : (interaction)=>{
-        if (!interaction.member.roles.cache.has("1107433014813790321")){
+        if (!interaction.member.roles.cache.has(adminId)){
             return interaction.reply("Only administrators can use this command")
         }
         const title = interaction.options.getString("title");

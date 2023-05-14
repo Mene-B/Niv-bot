@@ -22,7 +22,7 @@ client.on("guildMemberAdd", async member => {
     .setAuthor({
         name : `Welcome ${member.user.username}!`
     })
-    .setDescription(`Welcome to ${member.user.username}, we are so happy to have you in our team now !\nPlease click on the button below to get the roles of the server`)
+    .setDescription(`Welcome to ${member.user.username}, we are so happy to have you in our team now !\nPlease click on the button below to get the roles of the server`)  //You can modify the welcome message in this line
     .setColor("Gold")
 
     const button = new Discord.ButtonBuilder()
