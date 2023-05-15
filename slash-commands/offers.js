@@ -1,4 +1,4 @@
-const {SlashCommandBuilder,EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle} = require("discord.js");
+const {SlashCommandBuilder,EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors} = require("discord.js");
 const offers = require("../offersInfo.js")
 
 module.exports = {
@@ -28,11 +28,11 @@ module.exports = {
         const embed = new EmbedBuilder()
         .setAuthor({name : title})
         .setDescription(content)
-        .setColor("Blurple")
+        .setColor(Colors.Blurple)
 
         const button = new ButtonBuilder()
         .setCustomId("plans")
-        .setLabel("See our plans")
+        .setLabel("See our plans")  // edit the text of the button here
         .setStyle(ButtonStyle.Success)
 
         const row = new ActionRowBuilder()
@@ -53,7 +53,7 @@ module.exports = {
             .setAuthor({
                 name : "Our plans"
             })
-            .setDescription("Here are our plans !")
+            .setDescription("Here are our plans !") // edit the embed plans title and description here
             .setColor("DarkGold")
 
             newInteraction.message.components[0].components[0].data.disabled = true;

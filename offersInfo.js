@@ -9,4 +9,4 @@ module.exports = {
         {name : "offer7",description : "description7"},
 
     ]
-}// Here modify everything that you want to add in the different offers
+}// Here edit everything that you want to add in the different offers

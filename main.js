@@ -27,7 +27,7 @@ client.on("guildMemberAdd", async member => {
 
     const button = new Discord.ButtonBuilder()
     .setCustomId(member.user.id)
-    .setLabel("Verify")
+    .setLabel("Verify")  // modify the text of the button here
     .setStyle(Discord.ButtonStyle.Success)
 
     const row = new Discord.ActionRowBuilder()
@@ -49,12 +49,12 @@ client.on("guildMemberAdd", async member => {
         if (interaction.user.id !== interaction.customId){
             return interaction.reply(`${interaction.member.nickname || interaction.member.user.username} can't click on this button`)
         }
-        interaction.reply(`${member.user.username} verified successfully ! You now have the roles of the server.`);
+        interaction.reply(`${member.user.username} verified successfully ! You now have the roles of the server.`);  // edit the verify message here
         interaction.message.components[0].components[0].data.disabled = true;
         interaction.message.edit({
             components : interaction.message.components
         });
-        member.roles.add("1106311880231895170");  // you an replace this id with the id of the role that you want to add 
+        member.roles.add("1106311880231895170");  // you an replace this id with the id of the member role of your server
     })
 
 })
