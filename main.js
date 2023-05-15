@@ -21,12 +21,17 @@ client.on("ready" , async()=>{
     .addComponents([button])
     
 
+    const embed = new Discord.EmbedBuilder()
+    .setAuthor({name : "Welcome !"})
+    .setDescription("We are so glad to welcome you on our server !")
+    .setColor(Discord.Colors.Blurple)
+
     await client.guilds.cache.get(config.guildId).channels.cache.get("1107646526542594119").messages.fetch()
 
     if(client.guilds.cache.get(config.guildId).channels.cache.get("1107646526542594119").lastMessage){
         return;
     }else{
-        client.guilds.cache.get(config.guildId).channels.cache.get("1107646526542594119").send({components:[row]})
+        client.guilds.cache.get(config.guildId).channels.cache.get("1107646526542594119").send({embeds : [embed],components:[row]})
     }
     
 })
