@@ -12,7 +12,22 @@ const fs = require("fs");
 client.login(config.token)
 client.on("ready" , async()=>{
     console.log("The bot is ready to work");
-    //client.guilds.cache.get(config.guildId).channels.cache.get("1105915988920254497").send("Ready to work");
+    const button = new Discord.ButtonBuilder()
+    .setCustomId("verify")
+    .setLabel("Verify")
+    .setStyle(Discord.ButtonStyle.Success)
+
+    const row = new Discord.ActionRowBuilder()
+    .addComponents([button])
+    
+
+    await client.guilds.cache.get(config.guildId).channels.cache.get("1107646526542594119").messages.fetch()
+
+    if(client.guilds.cache.get(config.guildId).channels.cache.get("1107646526542594119").lastMessage){
+        return;
+    }else{
+        client.guilds.cache.get(config.guildId).channels.cache.get("1107646526542594119").send({components:[row]})
+    }
     
 })
 client.on("guildMemberAdd", async member => {
@@ -22,24 +37,14 @@ client.on("guildMemberAdd", async member => {
     .setAuthor({
         name : `Welcome ${member.user.username}!`
     })
-    .setDescription(`Welcome to ${member.user.username}, we are so happy to have you in our team now !\nPlease click on the button below to get the roles of the server`)  //You can modify the welcome message in this line
+    .setDescription(`Welcome to ${member.user.username}, we are so happy to have you in our team now !\nPlease click on the button in the verify channel to get the role of the server and have access to all the other channels`)  //You can modify the welcome message in this line
     .setColor("Gold")
 
-    const button = new Discord.ButtonBuilder()
-    .setCustomId(member.user.id)
-    .setLabel("Verify")  // modify the text of the button here
-    .setStyle(Discord.ButtonStyle.Success)
-
-    const row = new Discord.ActionRowBuilder()
-    .addComponents([button])
-
-
-    const message = await client.guilds.cache.get(config.guildId).channels.cache.get(config.welcomeChannelId).send({
-        embeds : [embed],
-        components :[row]
+    client.guilds.cache.get(config.guildId).channels.cache.get(config.welcomeChannelId).send({
+        embeds : [embed]
     })
 
-
+    /*
     const collector = message.createMessageComponentCollector({
         filter : ()=> true,
         time : 60000
@@ -55,7 +60,7 @@ client.on("guildMemberAdd", async member => {
             components : interaction.message.components
         });
         member.roles.add("1106311880231895170");  // you an replace this id with the id of the member role of your server
-    })
+    })*/
 
 })
 
@@ -65,5 +70,11 @@ client.on("interactionCreate", (interaction) => {
         const command = commandsFiles.find(cmd => cmd === interaction.commandName + ".js");
         const cmd = require("./slash-commands/" + command);
         cmd.run(interaction);
+    }
+    if (interaction.isButton()){
+        if(interaction.customId === "verify"){
+            interaction.member.roles.add("1106311880231895170");    // replace this id with the id of the member role of you server
+            interaction.reply({ephemeral : true, content : "Welcome !"})
+        }
     }
 })

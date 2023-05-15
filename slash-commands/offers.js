@@ -1,5 +1,5 @@
 const {SlashCommandBuilder,EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors} = require("discord.js");
-const offers = require("../offersInfo.js")
+const offers = require('../offers.json');
 
 module.exports = {
     data : new SlashCommandBuilder()
@@ -22,8 +22,8 @@ module.exports = {
     }),
     run : async (interaction)=> {
         const index = interaction.options.getInteger("number")-1;
-        const title = offers.offers[index].name;
-        const content = offers.offers[index].description;
+        const title = offers[index].name;
+        const content = offers[index].description;
 
         const embed = new EmbedBuilder()
         .setAuthor({name : title})
